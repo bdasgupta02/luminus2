@@ -44,7 +44,6 @@ export const AuthProvider = ({ children }) => {
     }
 
     const signin = async (nusnet, password) => {
-        console.log('test2')
         // get email
         const usersRef = db.collection('users')
         const usersEmail = await usersRef.where('nusnet', '==', nusnet).get()
@@ -84,6 +83,7 @@ export const AuthProvider = ({ children }) => {
     }
 
     useEffect(() => {
+        console.log('signout')
         signout()
         const unsubscribe = auth.onAuthStateChanged((user) => {
             setPending(false)
