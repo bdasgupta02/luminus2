@@ -12,7 +12,7 @@ const SignIn = (props) => {
     const [nusnet, setNusnet] = useState("")
     const [password, setPassword] = useState("")
     const [error, setError] = useState('')
-    const { signin } = useAuth()
+    const { signin, signout } = useAuth()
 
     const handleNusnetChange = (event) => {
         setNusnet(event.target.value)

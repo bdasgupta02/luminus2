@@ -17,6 +17,7 @@ import { Tabs, Tab, Typography, Box, Grow } from '@mui/material';
 import { PackageIcon, GraphIcon } from '@primer/octicons-react';
 
 // pages
+import NavBar from './components/Navbar';
 import SignInPage from './components/SignInPage';
 import LoadingIndicator from './components/LoadingIndicatorPage';
 import PModules from './components/PModules';
@@ -30,7 +31,7 @@ import PModules from './components/PModules';
 // conditional rendering if logged in
 const NavSwitcher = () => {
   const { isSignedIn } = useAuth()
-  const [value, setValue] = useState(1)
+  const [value, setValue] = useState(0)
   const history = useHistory()
 
   function a11yProps(index) {
@@ -47,23 +48,13 @@ const NavSwitcher = () => {
   console.log(value)
 
   // need to hide students from students
-  const routes = ['/auth', '/', '/loading', '/profile', '/students', '/notifs', '/dashboard']
+  const routes = [ '/', '/auth', '/loading', '/profile', '/students', '/notifs', '/dashboard']
   return (
     <Box style={{ flexGrow: 1, bgColor: 'background.paper', display: 'flex', minHeight: '100vh' }}>
       {isSignedIn ? (
-        <Tabs
-          indicatorColor="primary"
-          style={{ width: '200px' }}
-          orientation="vertical"
-          value={value}
-          onChange={handleChange}
-          sx={{ borderRight: 1, borderColor: 'divider', minHight: '100%' }}
-        >
-          <Tab label="Modules" icon={<PackageIcon size={24} />} {...a11yProps(0)} value={routes[1]} component={Link} to={routes[1]} />
-          <Tab label="Loading" {...a11yProps(2)} value={routes[2]} component={Link} to={routes[2]} />
-        </Tabs>
+        <NavBar />
       ) : null}
-      <div>
+      <div style={{ width: '100%'}}>
         <Switch>
           <PrivateRoute exact path="/" component={PModules} />
           <PrivateRoute exact path="/loading" component={LoadingIndicator} />

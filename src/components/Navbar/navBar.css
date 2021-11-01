@@ -1,0 +1,32 @@
+#NBarBox {
+    font-family: 'Roboto', sans-serif;
+    min-height: 100vh;
+    background-color: #1E1E1E; 
+    width: 'fit-content'; 
+    padding-left: 16px;
+    padding-right: 16px;
+}
+
+.NBarLogoSpacer {
+    width: 1px;
+    height: 100px;
+}
+
+#NBarLogoText {
+    
+    font-size: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 150px;
+    height: 60px;
+}
+
+.NBarLogoBlue {
+    color: white;
+}
+
+.NBarLogoOrange {
+    color: white;
+    font-weight: bold;
+}  
