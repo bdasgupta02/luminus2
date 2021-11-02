@@ -1,6 +1,7 @@
 import { useState } from "react"
 import SignIn from './SignIn'
 import SignUp from './SignUp'
+import LuminusLogo from '../LuminusLogo'
 import './signInPage.css'
 
 /**
@@ -14,7 +15,7 @@ const SignInPage = (props) => {
     return (
         <div id="SignInFullPage">
             <div className="SignInSpacerBig" />
-            {/* Logo goes here */}
+            <LuminusLogo />
             <div className="SignInSpacerBig" />
             <div id="SignInBox">
                 {isSignIn ? (<SignIn />) : (<SignUp />)}

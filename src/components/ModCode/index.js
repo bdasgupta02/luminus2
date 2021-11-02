@@ -9,7 +9,8 @@ function ModCode(props) {
         backgroundColor: '#DCDCDC',
         paddingLeft: '8px',
         paddingRight: '8px',
-        fontWeight: 'bold'
+        fontWeight: 'bold',
+        width: 'fit-content'
     }
 
     return (

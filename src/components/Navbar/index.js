@@ -2,21 +2,17 @@ import React from 'react'
 import NavButton from './NavButton'
 import { Container, Row, Col } from 'react-grid-system'
 import { useAuth } from '../../contexts/AuthContext'
+import LuminusLogo from '../LuminusLogo'
 import { PackageIcon, GraphIcon, PeopleIcon, BellIcon, PersonIcon, SignOutIcon } from '@primer/octicons-react';
 import './navBar.css'
 
 const NavBar = () => {
     const { isProf } = useAuth()
 
-    console.log(isProf)
     return (
         <div id="NBarBox">
             <div className="NBarLogoSpacer" />
-            <div id="NBarLogoText">
-                <span className="NBarLogoBlue">Lumi</span>
-                <span className="NBarLogoOrange">NUS</span>
-                <span className="NBarLogoBlue">&nbsp;2.0</span>
-            </div>
+            <LuminusLogo isInvert />
             <div className="NBarLogoSpacer" />
             <nav>
                 <Col>

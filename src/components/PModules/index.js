@@ -5,7 +5,7 @@ import SearchInput, { createFilter } from 'react-search-input'
 import { Row, Col } from 'react-grid-system'
 import { useAuth } from '../../contexts/AuthContext'
 import Button from '../Button'
-import ModCode from './ModCode'
+import ModCode from '../ModCode'
 import { db } from '../../firebase'
 import FullPageWrapper from '../FullPageWrapper'
 import { useHistory } from 'react-router-dom'
@@ -88,24 +88,52 @@ const PModules = (props) => {
         // null checks
         if (newModDetails.code === '' || newModDetails.title === '' || newModDetails.description === '') {
             alert('Error! Some values are empty')
+        } else {
+
+            newModDetails.code = newModDetails.code.toUpperCase()
+            newModDetails.code = newModDetails.code.trim()
+            newModDetails.title = newModDetails.title.trim()
+            newModDetails.description = newModDetails.description.trim()
+
+            // mod code check
+            const modRef = db.collection('modules')
+            const modCodeCheck = await modRef.where('code', '==', newModDetails.code).get()
+
+            if (modCodeCheck !== null && modCodeCheck.docs !== null && modCodeCheck.docs.length > 0) {
+                alert('Error: Module code already exists!')
+                setModalVisible(false)
+            } else {
+                // [create] module document and [edit] to prof's modulesRegistered
+                let docId = ''
+                await db.collection('modules').add(newModDetails).then((doc) => {
+                    db.collection('users').doc(currentUserId).collection('modulesRegistered').add({
+                        init: false,
+                        module: db.doc('modules/' + doc.id)
+                    })
+                    docId = doc.id
+                })
+
+                setModalVisible(false)
+                history.push("/view_module", { docId: docId })
+            }
         }
-
-        // mod code check
-        const modRef = db.collection('')
-
-        // [create] module document and [edit] to prof's modulesRegistered
-        let docId = ''
-        await db.collection('modules').add(newModDetails).then((doc) => {
-            db.collection('users').doc(currentUserId).collection('modulesRegistered').add({
-                init: false,
-                module: db.doc('modules/' + doc.id)
-            })
-            docId = doc.id
-        })
-
-        setModalVisible(false)
-        history.push("/modules/view_module", { docId: docId })
     }
+
+
+
+
+
+
+
+    // Navigate
+    const goToMod = async (code) => {
+        const modRef = db.collection('modules')
+        const modCodeCheck = await modRef.where('code', '==', code).get()
+        if (modCodeCheck !== null && modCodeCheck.docs !== null && modCodeCheck.docs.length > 0) {
+            history.push("/view_module", { docId: modCodeCheck.docs[0].id })
+        }
+    }
+
 
 
 
@@ -152,7 +180,7 @@ const PModules = (props) => {
                                                 </Col>
                                             </CardContent>
                                             <CardActions>
-                                                <Button size="small">View module</Button>
+                                                <Button size="small" onClick={() => goToMod(mod.code)}>View module</Button>
                                             </CardActions>
                                         </Card>
                                     </Grid>
@@ -172,11 +200,11 @@ const PModules = (props) => {
                         <Row>
                             <input className="PModInputText" type="text" placeholder="Module code" onChange={(event) => handleModInput(event, 'code')} value={newModDetails.code} />
                         </Row>
-                        <div className="PModInputSpacer" />
+                        <div className="PMVInputSpacer" />
                         <Row>
                             <input className="PModInputText" type="text" placeholder="Module title" onChange={(event) => handleModInput(event, 'title')} value={newModDetails.title} />
                         </Row>
-                        <div className="PModInputSpacer" />
+                        <div className="PMVInputSpacer" />
                         <Row>
                             <textarea cols="40" rows="5" className="PModInputTextML" type="text" placeholder="Module description" onChange={(event) => handleModInput(event, 'description')} value={newModDetails.description} />
                         </Row>

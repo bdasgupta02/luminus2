@@ -1,6 +1,7 @@
 import React from 'react'
 
-function PDashboard() {
+// redirect to / if not students
+function PStudents() {
     return (
         <div>
             
@@ -8,4 +9,4 @@ function PDashboard() {
     )
 }
 
-export default PDashboard
+export default PStudents

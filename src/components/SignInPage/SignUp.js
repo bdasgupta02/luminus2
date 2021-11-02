@@ -15,6 +15,7 @@ const SignUp = (props) => {
         email: '',
         password: '',
         nusnet: '',
+        name: '',
         isProf: false,
         isDeleted: false,
         isBlocked: false,
@@ -81,6 +82,10 @@ const SignUp = (props) => {
                 <div className="SignInSpacer" />
                 <Row>
                     <input className="SignInInputText" type="text" placeholder="NUSNET" value={details.nusnet} onChange={event => handleDetailChange(event, 'nusnet')} />
+                </Row>
+                <div className="SignInSpacer" />
+                <Row>
+                    <input className="SignInInputText" type="text" placeholder="Name" value={details.name} onChange={event => handleDetailChange(event, 'name')} />
                 </Row>
                 <div className="SignInSpacer" />
                 <div className="SignInSpacer" />

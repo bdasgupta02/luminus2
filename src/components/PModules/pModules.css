@@ -59,6 +59,7 @@
 
 .PModCardText {
     width: 100%;
+    font-size: 14px;
 }
 
 .PModCard:hover {

@@ -21,6 +21,11 @@ import NavBar from './components/Navbar';
 import SignInPage from './components/SignInPage';
 import LoadingIndicator from './components/LoadingIndicatorPage';
 import PModules from './components/PModules';
+import PStudents from './components/PStudents'
+import PThreadView from './components/PThreadView'
+import PModuleView from './components/PModuleView'
+import PNotifs from './components/PNotifs'
+import PDashboard from './components/PDashboard'
 
 
 /**
@@ -30,25 +35,9 @@ import PModules from './components/PModules';
 
 // conditional rendering if logged in
 const NavSwitcher = () => {
-  const { isSignedIn } = useAuth()
-  const [value, setValue] = useState(0)
-  const history = useHistory()
-
-  function a11yProps(index) {
-    return {
-      id: `vertical-tab-${index}`,
-      'aria-controls': `vertical-tabpanel-${index}`,
-    };
-  }
-
-  const handleChange = (event, newValue) => {
-    setValue(newValue)
-  }
-
-  console.log(value)
+  const { isSignedIn, isProf } = useAuth()
 
   // need to hide students from students
-  const routes = [ '/', '/auth', '/loading', '/profile', '/students', '/notifs', '/dashboard']
   return (
     <Box style={{ flexGrow: 1, bgColor: 'background.paper', display: 'flex', minHeight: '100vh' }}>
       {isSignedIn ? (
@@ -57,7 +46,11 @@ const NavSwitcher = () => {
       <div style={{ width: '100%'}}>
         <Switch>
           <PrivateRoute exact path="/" component={PModules} />
-          <PrivateRoute exact path="/loading" component={LoadingIndicator} />
+          <PrivateRoute exact path="/dashboard" component={PDashboard} />
+          {isProf && <PrivateRoute exact path="/students" component={PStudents} />}
+          <PrivateRoute exact path="/view_module" component={PModuleView} />
+          <PrivateRoute exact path="/view_module/view_thread" component={PThreadView} />
+          <PrivateRoute exact path="/notifs" component={PNotifs} />
           <Route path="/auth" component={SignInPage} />
         </Switch>
       </div>

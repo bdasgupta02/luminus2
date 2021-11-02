@@ -1,0 +1,91 @@
+#PMVTitle {
+    font-family: 'Roboto', sans-serif;
+    font-size: 30px;
+    font-weight: bold;
+    color: #1E1E1E;
+}
+
+.PMVTextBox {
+    font-family: 'Roboto', sans-serif;
+    width: 100%;
+    color: #1E1E1E;
+    max-width: 600px;
+}
+
+.PMVModTitle {
+    font-size: 20px;
+    font-weight: bold;
+}
+
+.PMVModDesc {
+    font-size: 14px;
+}
+
+.PMVCard {
+    background-color: #FFF !important;
+    border-radius: 12px !important; 
+    max-width: 80%;
+}
+
+.PMVCard:hover {
+    box-shadow: 4px 10px 15px #00000026 !important;
+}
+
+.PMVCardText {
+    width: 100%;
+    font-size: 14px;
+}
+
+.PMVModalTitle {
+    font-family: 'Roboto', sans-serif;
+    font-size: 30px;
+    font-weight: bold;
+    color: #1E1E1E;
+    margin-left: 8px;
+    margin-top: 25px;
+    margin-bottom: 50px;
+}
+
+#PMVSearchBox {
+    margin-left: 20px;
+    height: 40px;
+    width: 70%;
+    margin-top: 20px;
+    margin-right: 35px;
+    border: 0 none;
+    outline: none;
+    background-color: #fff;
+    box-shadow: 4px 10px 15px #0000001A;
+    border-radius: 12px;
+    padding-left: 10px;
+}
+
+.PMVInputText {
+    font-size: 14px;
+    width: 400px;
+    height: 30px;
+    outline: none;
+    border: 0;
+    background-color: #ebebeb;
+    border-radius: 8px;
+    padding-left: 8px;
+    margin-left: 20px;
+}
+
+.PMVInputSpacer {
+    width: 100%;
+    height: 8px;
+}
+
+#PMVForumTileBox {
+    font-family: 'Roboto', sans-serif;
+    margin-top: 10px;
+    border-radius: 12px;
+    background-color: #F2F6FE;
+}
+
+.PMVForumText {
+    font-size: 14px;
+    margin-left: 16px;
+    width: 80%;
+}

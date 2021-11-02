@@ -1,6 +1,6 @@
 import React from 'react'
 
-function PDashboard() {
+function PNotifs() {
     return (
         <div>
             
@@ -8,4 +8,4 @@ function PDashboard() {
     )
 }
 
-export default PDashboard
+export default PNotifs
