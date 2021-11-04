@@ -1,0 +1,18 @@
+#PPVTitle {
+    font-family: 'Roboto', sans-serif;
+    font-size: 30px;
+    font-weight: bold;
+    color: #1E1E1E;
+}
+
+.PPVTextBox {
+    font-family: 'Roboto', sans-serif;
+    width: 100%;
+    color: #1E1E1E;
+    max-width: 600px;
+    margin-bottom: 10px;
+}
+
+.PPVBold {
+    font-weight: bold;
+}

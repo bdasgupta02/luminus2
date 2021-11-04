@@ -2,6 +2,7 @@ import React from 'react'
 import { useHistory } from 'react-router-dom'
 import { Card, CardContent, CardActions } from '@mui/material'
 import { Row, Col } from 'react-grid-system'
+import { useAuth } from '../../contexts/AuthContext'
 import Button from '../Button'
 import ModCode from '../ModCode'
 
@@ -9,6 +10,7 @@ import './pModuleView.css'
 
 function ProfileTile(props) {
     const { id, name, nusnet, email, isProf, overrideFunc, isAdd } = props
+    const { currentUserId } = useAuth()
     const userStr = isProf ? 'professor' : 'student'
     const history = useHistory()
 
@@ -21,7 +23,11 @@ function ProfileTile(props) {
     }
 
     const handleViewProfile = () => {
-        history.push("/view_profile", { docId: id })
+        if (id === currentUserId) {
+            history.push("/my_profile", { docId: id, profileIsProf: isProf })
+        } else {
+            history.push("/view_profile", { docId: id, profileIsProf: isProf })
+        }
     }
 
     const getLeadingText = () => {
@@ -33,7 +39,7 @@ function ProfileTile(props) {
     }
 
     return (
-        <div style={{marginTop: '16px'}}>
+        <div style={{ marginTop: '16px' }}>
             <Card className="PMVCard">
                 <CardContent>
                     <Col style={{ marginLeft: '16px' }}>

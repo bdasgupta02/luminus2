@@ -27,11 +27,16 @@ const NavBar = () => {
                             <NavButton text="Students" to="/students" icon={<PeopleIcon size={16} />} />
                         </Row>
                     )}
+                    {isProf && (
+                        <Row>
+                            <NavButton text="Professors" to="/professors" icon={<PeopleIcon size={16} />} />
+                        </Row>
+                    )}
                     <Row>
                         <NavButton text="Notifications" to="/notifs" icon={<BellIcon size={16} />} />
                     </Row>
                     <Row>
-                        <NavButton text="Profile" to="/profile" icon={<PersonIcon size={16} />} />
+                        <NavButton text="Profile" to="/my_profile" icon={<PersonIcon size={16} />} />
                     </Row>
                     <Row>
                         <NavButton text="Sign-out" to="/auth" isSignOut icon={<SignOutIcon size={16} />} />

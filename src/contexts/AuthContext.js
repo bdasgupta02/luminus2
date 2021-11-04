@@ -11,13 +11,13 @@ export const useAuth = () => {
 }
 
 export const AuthProvider = ({ children }) => {
+    const [currentUserName, setCurrentUserName] = useState(null)
     const [currentUser, setCurrentUser] = useState(null);
     const [isSignedIn, setIsSignedIn] = useState(false)
     const [isProf, setIsProf] = useState(false)
     const [pending, setPending] = useState(true);
 
     const signup = async (email, password, details) => {
-        console.log('test1')
         // nusnet check
         const usersRef = db.collection('users')
         const usersEmail = await usersRef.where('nusnet', '==', details.nusnet).get()
@@ -35,10 +35,10 @@ export const AuthProvider = ({ children }) => {
 
         // create user
         const user = auth.createUserWithEmailAndPassword(email, password).then((res) => {
+            setCurrentUserName(details.name)
             setIsProf(details.isProf)
             db.collection('users').doc(res.user.uid).set(details)
             db.collection('users').doc(res.user.uid).collection('modulesRegistered').doc('init').set({init: true})
-            db.collection('users').doc(res.user.uid).collection('postsCreated').doc('init').set({init: true})
         })
         return user
     }
@@ -47,18 +47,24 @@ export const AuthProvider = ({ children }) => {
         // get email
         const usersRef = db.collection('users')
         const usersEmail = await usersRef.where('nusnet', '==', nusnet).get()
-
         let check = false;
         let email = ''
+        let isBlocked = false
         usersEmail.docs.forEach(item => {
             if (item.data().nusnet === nusnet) {
                 check = true;
                 email = item.data().email
+                isBlocked = item.data().isBlocked
+                setCurrentUserName(item.data().name)
                 setIsProf(item.data().isProf)
             }
         })
 
         if (!check || email === '') {
+            return null
+        }
+
+        if (isBlocked) {
             return null
         }
 
@@ -83,7 +89,6 @@ export const AuthProvider = ({ children }) => {
     }
 
     useEffect(() => {
-        console.log('signout')
         signout()
         const unsubscribe = auth.onAuthStateChanged((user) => {
             setPending(false)
@@ -102,6 +107,7 @@ export const AuthProvider = ({ children }) => {
         currentUser,
         currentUserId: currentUser === null ? null : currentUser.multiFactor.user.uid,
         isProf,
+        currentUserName,
         signup,
         signin,
         signout,

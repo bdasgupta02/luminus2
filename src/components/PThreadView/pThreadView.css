@@ -1,0 +1,94 @@
+#PTVTitle {
+    font-family: 'Roboto', sans-serif;
+    font-size: 30px;
+    font-weight: bold;
+    color: #1E1E1E;
+}
+
+.PTVTextBox {
+    font-family: 'Roboto', sans-serif;
+    width: 100%;
+    color: #1E1E1E;
+    max-width: 600px;
+}
+
+.PTVModTitle {
+    font-size: 20px;
+    font-weight: bold;
+}
+
+.PTVModDesc {
+    font-size: 14px;
+}
+
+.PTVModalTitle {
+    font-family: 'Roboto', sans-serif;
+    font-size: 30px;
+    font-weight: bold;
+    color: #1E1E1E;
+    margin-left: 8px;
+    margin-top: 25px;
+    margin-bottom: 50px;
+}
+
+.PTVInputText {
+    font-size: 14px;
+    width: 400px;
+    height: 30px;
+    outline: none;
+    border: 0;
+    background-color: #ebebeb;
+    border-radius: 8px;
+    padding-left: 8px;
+    margin-left: 20px;
+}
+
+.PTVLabel {
+    font-size: 12px;
+    color: #1E1E1E;
+    margin-left: 6px;
+    font-weight: bold;
+}
+
+#PTVInputTextML {
+    font-family: 'Roboto', sans-serif;
+    font-size: 14px;
+    width: 70%;
+    height: 100px;
+    outline: none;
+    border: 0;
+    background-color: white;
+    padding-top: 8px;
+    border-radius: 8px;
+    padding-left: 8px;
+    margin-left: 7px;
+    resize: none;
+    box-shadow: 4px 10px 15px #0000001A;
+}
+
+.PTVPostBG {
+    font-family: 'Roboto', sans-serif;
+    border-radius: 8px;
+    background-color: white;
+    width: 80%;
+    padding: 8px;
+}
+
+.PTVPostContent {
+    font-size: 14px;
+    width: 100%;
+}
+
+.PTVPostName {
+    font-size: 12px;
+    font-weight: bold;
+    margin-bottom: 8px;
+    width: 100%;
+}
+
+.PTVPostDate {
+    font-size: 12px;
+    font-weight: bold;
+    color: #707070;
+    width: 100%;
+}

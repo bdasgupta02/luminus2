@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react'
 import { Box, Tabs, Tab, Typography, TabIndicatorProps } from '@mui/material'
 import FullPageWrapper from '../FullPageWrapper';
 import { db } from '../../firebase';
-import { useLocation } from 'react-router-dom'
+import { useLocation, useHistory } from 'react-router-dom'
 import ModCode from '../ModCode';
 import { useAuth } from '../../contexts/AuthContext'
 import { Row, Col } from 'react-grid-system';
@@ -11,7 +11,6 @@ import ReactModal from 'react-modal';
 import Button from '../Button'
 import { PlusIcon, XIcon } from '@primer/octicons-react';
 import ProfList from './ProfList'
-import { useHistory } from 'react-router';
 import ProfileTile from './ProfileTile';
 import ForumTile from './ForumTile';
 import SearchInput, { createFilter } from 'react-search-input'
@@ -168,22 +167,18 @@ function PModuleView(props) {
         fetch()
     }, [])
 
-    const handleAddUser = async (stuId) => {
+    const handleAddUser = async (uId) => {
 
         const currentModRef = db.collection('modules').doc(docId)
-        await db.collection('users').doc(stuId).collection('modulesRegistered').add({
+        await db.collection('users').doc(uId).collection('modulesRegistered').add({
             init: false,
             module: currentModRef
         })
 
+        setProfModalVisible(false)
         setStuModalVisible(false)
         setSearchTerm('')
         fetch()
-    }
-
-    const handleModalClose = () => {
-        setStuModalVisible(false)
-        setSearchTerm('')
     }
 
 
@@ -332,7 +327,7 @@ function PModuleView(props) {
                                         <Row>
                                             <input className="PMVInputText" type="text" placeholder="Title" onChange={(event) => handleForumInput(event, 'title')} value={newForumDetails.title} />
                                         </Row>
-                                        <div className="PModInputSpacer" />
+                                        <div style={{width: '100%', height: '10px'}} />
                                         <Row>
                                             <input className="PMVInputText" type="text" placeholder="Description" onChange={(event) => handleForumInput(event, 'description')} value={newForumDetails.description} />
                                         </Row>

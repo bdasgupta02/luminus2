@@ -26,12 +26,9 @@ import PThreadView from './components/PThreadView'
 import PModuleView from './components/PModuleView'
 import PNotifs from './components/PNotifs'
 import PDashboard from './components/PDashboard'
+import PProfileView from './components/PProfileView'
+import PMyProfileView from './components/PMyProfileView';
 
-
-/**
- * TODO:
- * - check if you need nav route or can just conditionally route
- */
 
 // conditional rendering if logged in
 const NavSwitcher = () => {
@@ -40,16 +37,16 @@ const NavSwitcher = () => {
   // need to hide students from students
   return (
     <Box style={{ flexGrow: 1, bgColor: 'background.paper', display: 'flex', minHeight: '100vh' }}>
-      {isSignedIn ? (
-        <NavBar />
-      ) : null}
-      <div style={{ width: '100%'}}>
+      {isSignedIn && (<NavBar />)}
+      <div style={{ width: '100%', overflow: 'auto' }}>
         <Switch>
           <PrivateRoute exact path="/" component={PModules} />
           <PrivateRoute exact path="/dashboard" component={PDashboard} />
           {isProf && <PrivateRoute exact path="/students" component={PStudents} />}
           <PrivateRoute exact path="/view_module" component={PModuleView} />
           <PrivateRoute exact path="/view_module/view_thread" component={PThreadView} />
+          <PrivateRoute exact path="/my_profile" component={PMyProfileView} />
+          <PrivateRoute exact path="/view_profile" component={PProfileView} />
           <PrivateRoute exact path="/notifs" component={PNotifs} />
           <Route path="/auth" component={SignInPage} />
         </Switch>

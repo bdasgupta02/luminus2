@@ -35,6 +35,8 @@ const SignIn = (props) => {
             setIsLoading(false)
         } else {
             try {
+                console.log(nusnet)
+                console.log(password)
                 const response = await signin(nusnet, password)
                 if (response !== null) {
                     history.push("/")
