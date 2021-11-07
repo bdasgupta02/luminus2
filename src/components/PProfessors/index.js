@@ -3,15 +3,18 @@ import { db } from '../../firebase'
 import SearchInput, { createFilter } from 'react-search-input'
 import FullPageWrapper from '../FullPageWrapper'
 import ProfileTile from '../ProfileTile'
+import { CircularProgress } from '@mui/material'
 import './professors.css'
 
 function SearchProfessors() {
+    const [isLoading, setLoading] = useState(false)
     const [professors, setProfessors] = useState([])
     const [searchText, setSearchText] = useState('')
 
 
     // DB
     const fetch = async () => {
+        setLoading(true)
         let profs = []
         const profsGet = await db.collection('users').where('isProf', '==', true).get()
         for (let i = 0; i < profsGet.docs.length; i++) {
@@ -20,6 +23,7 @@ function SearchProfessors() {
             profs.push(professor)
         }
         setProfessors(profs)
+        setLoading(false)
     }
 
     useEffect(() => {
@@ -54,6 +58,12 @@ function SearchProfessors() {
                 {searchedProfessors.map(e => (
                     <ProfileTile {...e} />
                 ))}
+
+                {isLoading && (
+                    <div style={{ marginLeft: '35px' }}>
+                        <CircularProgress />
+                    </div>
+                )}
             </div>
         </FullPageWrapper>
     )
