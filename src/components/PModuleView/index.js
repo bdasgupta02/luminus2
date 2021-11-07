@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react'
-import { Box, Tabs, Tab, Typography, TabIndicatorProps } from '@mui/material'
+import { Box, Tabs, Tab, Typography, CircularProgress } from '@mui/material'
 import FullPageWrapper from '../FullPageWrapper';
 import { db } from '../../firebase';
 import { useLocation, useHistory } from 'react-router-dom'
@@ -11,7 +11,7 @@ import ReactModal from 'react-modal';
 import Button from '../Button'
 import { PlusIcon, XIcon } from '@primer/octicons-react';
 import ProfList from './ProfList'
-import ProfileTile from './ProfileTile';
+import ProfileTile from '../ProfileTile';
 import ForumTile from './ForumTile';
 import SearchInput, { createFilter } from 'react-search-input'
 import './pModuleView.css'
@@ -42,6 +42,20 @@ function a11yProps(index) {
         'aria-controls': `simple-tabpanel-${index}`,
     };
 }
+
+
+/**
+ * Origin:
+ * history = useHistory()
+ * history.push("/path", object)
+ * 
+ * Destination:
+ * location = useLocation().state
+ * 
+ */
+
+
+
 
 function PModuleView(props) {
     const location = useLocation().state
@@ -78,6 +92,7 @@ function PModuleView(props) {
 
     // forums
     const [forums, setForums] = useState([])
+    const [isLoading, setLoading] = useState(false)
 
     // mod itself
     const [details, setDetails] = useState({
@@ -89,6 +104,7 @@ function PModuleView(props) {
 
     // DB
     const fetch = async () => {
+        setLoading(true)
         const modRef = db.collection('modules').doc(docId)
         const modGet = await modRef.get()
         const modData = modGet.data()
@@ -147,7 +163,7 @@ function PModuleView(props) {
             let j = 0, lenThread = threadsGet.docs.length
             while (j < lenThread) {
                 let thread = threadsGet.docs[j].data()
-                thread = { ...thread, id: threadsGet.docs[j].id  }
+                thread = { ...thread, id: threadsGet.docs[j].id }
                 threadsRes.push(thread)
                 j++
             }
@@ -162,6 +178,7 @@ function PModuleView(props) {
         setPotentialProfs(potProfRef)
         setPotentialStu(potStuRef)
         setForums(typeof forumRes !== 'undefined' ? forumRes : [])
+        setLoading(false)
     }
     useEffect(() => {
         fetch()
@@ -256,7 +273,7 @@ function PModuleView(props) {
         await db.collection('modules').doc(docId).collection('forums').doc(forumId).delete()
         fetch()
     }
-    
+
     const handleEditForum = async (forumId, editDetails) => {
         if (editDetails.title === '' || editDetails.description === '') {
             alert('Error: one or more field(s) are empty!')
@@ -270,7 +287,7 @@ function PModuleView(props) {
         if (newThreadDetails.title === '' || newThreadDetails.description === '' || newThreadDetails.status === '') {
             alert('Error: one or more field(s) are empty!')
         } else {
-            await db.collection('modules').doc(docId).collection('forums').doc(forumId).collection('threads').add(newThreadDetails)
+            await db.collection('modules').doc(docId).collection('forums').doc(forumId).collection('threads').add({ ...newThreadDetails, creatorId: currentUserId })
             fetch()
         }
     }
@@ -278,7 +295,7 @@ function PModuleView(props) {
 
 
 
-    
+
     return (
         <FullPageWrapper>
             <div style={{ paddingLeft: '35px', paddingTop: '90px' }}>
@@ -313,8 +330,9 @@ function PModuleView(props) {
 
                         {forums.map(e => {
                             return (
-                            <ForumTile forum={e} modId={docId} deleteForum={handleDeleteForum} editForum={handleEditForum} createThread={handleCreateThread} />
-                        )})}
+                                <ForumTile forum={e} modId={docId} deleteForum={handleDeleteForum} editForum={handleEditForum} createThread={handleCreateThread} />
+                            )
+                        })}
 
                         <ReactModal isOpen={forumModalVisible} ariaHideApp>
                             <div className="PMVModalTitle">
@@ -327,7 +345,7 @@ function PModuleView(props) {
                                         <Row>
                                             <input className="PMVInputText" type="text" placeholder="Title" onChange={(event) => handleForumInput(event, 'title')} value={newForumDetails.title} />
                                         </Row>
-                                        <div style={{width: '100%', height: '10px'}} />
+                                        <div style={{ width: '100%', height: '10px' }} />
                                         <Row>
                                             <input className="PMVInputText" type="text" placeholder="Description" onChange={(event) => handleForumInput(event, 'description')} value={newForumDetails.description} />
                                         </Row>
@@ -390,6 +408,11 @@ function PModuleView(props) {
 
                     </TabPanel>
                 </Box>
+                {isLoading && (
+                    <div style={{ marginLeft: '35px' }}>
+                        <CircularProgress />
+                    </div>
+                )}
                 <div style={{ width: '1px', height: '50px' }} />
             </div>
 

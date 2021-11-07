@@ -1,0 +1,14 @@
+.PTCard {
+    background-color: #FFF !important;
+    border-radius: 12px !important; 
+    max-width: 80%;
+}
+
+.PTCard:hover {
+    box-shadow: 4px 10px 15px #00000026 !important;
+}
+
+.PTCardText {
+    width: 100%;
+    font-size: 14px;
+}

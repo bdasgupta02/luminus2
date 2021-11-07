@@ -1,0 +1,12 @@
+#NotifsTitle {
+    font-family: 'Roboto', sans-serif;
+    font-size: 30px;
+    font-weight: bold;
+    color: #1E1E1E;
+}
+
+#NotifsSubtitle {
+    font-family: 'Roboto', sans-serif;
+    font-size: 14px;
+    color: #8A8A8A;
+}

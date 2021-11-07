@@ -6,7 +6,7 @@ import { useAuth } from '../../contexts/AuthContext'
 import Button from '../Button'
 import ModCode from '../ModCode'
 
-import './pModuleView.css'
+import './profileTile.css'
 
 function ProfileTile(props) {
     const { id, name, nusnet, email, isProf, overrideFunc, isAdd } = props
@@ -40,12 +40,12 @@ function ProfileTile(props) {
 
     return (
         <div style={{ marginTop: '16px' }}>
-            <Card className="PMVCard">
+            <Card className="PTCard">
                 <CardContent>
                     <Col style={{ marginLeft: '16px' }}>
-                        <Row className="PMVCardText" style={{ justifyContent: 'flex-end', width: '100%' }}><ModCode code={"NUSNET: " + nusnet} /></Row>
-                        <Row className="PMVCardText" style={{ fontWeight: "bold" }}>{name}</Row>
-                        <Row className="PMVCardText">{email}</Row>
+                        <Row className="PTCardText" style={{ justifyContent: 'flex-end', width: '100%' }}><ModCode code={"NUSNET: " + nusnet} /></Row>
+                        <Row className="PTCardText" style={{ fontWeight: "bold" }}>{name}</Row>
+                        <Row className="PTCardText">{email}</Row>
                     </Col>
                 </CardContent>
                 <CardActions>

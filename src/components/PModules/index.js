@@ -39,6 +39,7 @@ const PModules = (props) => {
     // DB
     useEffect(() => {
         const fetch = async () => {
+            setIsLoading(true)
             const mods = await db.collection('users').doc(currentUserId).collection('modulesRegistered').get()
 
             const res = []
@@ -51,6 +52,7 @@ const PModules = (props) => {
                 i++;
             }
             setModules(res)
+            setIsLoading(false)
         }
         fetch()
     }, [])
@@ -162,7 +164,7 @@ const PModules = (props) => {
                             <SearchInput id="PModSearchBox" fuzzy value={searchText} onChange={handleSearch} placeholder={"Search for modules"} />
                         </Grid>
 
-                        {isLoading ? <CircularProgress /> : null}
+
 
                         <Grid container justify="center" spacing={2} style={{ margin: "19px" }} xs={12}>
                             {searchedMods.map((mod) => {
@@ -189,7 +191,13 @@ const PModules = (props) => {
                         </Grid>
 
                     </Grid>
+
                 </Stack>
+                {isLoading && (
+                    <div style={{ marginLeft: '35px' }}>
+                        <CircularProgress />
+                    </div>
+                )}
             </div>
             <ReactModal isOpen={modalVisible} ariaHideApp>
                 <div id="PModCreateModalTitle">

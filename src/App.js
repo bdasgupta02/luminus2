@@ -22,6 +22,7 @@ import SignInPage from './components/SignInPage';
 import LoadingIndicator from './components/LoadingIndicatorPage';
 import PModules from './components/PModules';
 import PStudents from './components/PStudents'
+import PProfessors from './components/PProfessors'
 import PThreadView from './components/PThreadView'
 import PModuleView from './components/PModuleView'
 import PNotifs from './components/PNotifs'
@@ -42,7 +43,8 @@ const NavSwitcher = () => {
         <Switch>
           <PrivateRoute exact path="/" component={PModules} />
           <PrivateRoute exact path="/dashboard" component={PDashboard} />
-          {isProf && <PrivateRoute exact path="/students" component={PStudents} />}
+          <PrivateRoute exact path="/students" component={PStudents} />
+          <PrivateRoute exact path="/professors" component={PProfessors} />
           <PrivateRoute exact path="/view_module" component={PModuleView} />
           <PrivateRoute exact path="/view_module/view_thread" component={PThreadView} />
           <PrivateRoute exact path="/my_profile" component={PMyProfileView} />

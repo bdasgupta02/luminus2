@@ -1,5 +1,5 @@
 import React from 'react'
-import ProfileTile from './ProfileTile'
+import ProfileTile from '../ProfileTile'
 
 function StudentList(props) {
     const { list } = props

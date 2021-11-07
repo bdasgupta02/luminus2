@@ -1,11 +1,11 @@
-#SPTitle {
+#PTTitle {
     font-family: 'Roboto', sans-serif;
     font-size: 30px;
     font-weight: bold;
     color: #1E1E1E;
 }
 
-#SPSearchBox {
+#PTSearchBox {
     height: 40px;
     width: 80%;
     max-width: 800px;
