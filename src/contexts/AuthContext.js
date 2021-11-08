@@ -51,6 +51,11 @@ export const AuthProvider = ({ children }) => {
         let email = ''
         let isBlocked = false
         usersEmail.docs.forEach(item => {
+            if (item.data().isBlocked) {
+                alert('You\'re blocked!')
+                return null
+            }
+
             if (item.data().nusnet === nusnet) {
                 check = true;
                 email = item.data().email
