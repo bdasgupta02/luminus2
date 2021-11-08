@@ -75,6 +75,7 @@ const SignIn = (props) => {
                 <div className="SignInSpacerBig" />
                 <Button variant="contained" style={{ width: '150px' }} onClick={onSignIn}>Sign-in</Button>
                 {error !== '' ? (<Row id="SignInErrorText">{error}</Row>) : null}
+                <div className="SignInSpacer" />
                 {isLoading ? <CircularProgress /> : null}
                 <div className="SignInSpacerBig" />
 

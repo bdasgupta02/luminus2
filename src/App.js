@@ -19,21 +19,20 @@ import { PackageIcon, GraphIcon } from '@primer/octicons-react';
 // pages
 import NavBar from './components/Navbar';
 import SignInPage from './components/SignInPage';
-import LoadingIndicator from './components/LoadingIndicatorPage';
 import PModules from './components/PModules';
 import PStudents from './components/PStudents'
 import PProfessors from './components/PProfessors'
 import PThreadView from './components/PThreadView'
 import PModuleView from './components/PModuleView'
 import PNotifs from './components/PNotifs'
-import PDashboard from './components/PDashboard'
 import PProfileView from './components/PProfileView'
 import PMyProfileView from './components/PMyProfileView';
+import PYourThreads from './components/PYourThreads'
 
 
 // conditional rendering if logged in
 const NavSwitcher = () => {
-  const { isSignedIn, isProf } = useAuth()
+  const { isSignedIn } = useAuth()
 
   // need to hide students from students
   return (
@@ -42,7 +41,7 @@ const NavSwitcher = () => {
       <div style={{ width: '100%', overflow: 'auto' }}>
         <Switch>
           <PrivateRoute exact path="/" component={PModules} />
-          <PrivateRoute exact path="/dashboard" component={PDashboard} />
+          <PrivateRoute exact path="/my_threads" component={PYourThreads} />
           <PrivateRoute exact path="/students" component={PStudents} />
           <PrivateRoute exact path="/professors" component={PProfessors} />
           <PrivateRoute exact path="/view_module" component={PModuleView} />

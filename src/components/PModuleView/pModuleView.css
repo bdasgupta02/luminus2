@@ -84,3 +84,8 @@
     margin-left: 16px;
     width: 80%;
 }
+
+.PMVCardText {
+    width: 100%;
+    font-size: 14px;
+}

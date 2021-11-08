@@ -143,7 +143,6 @@ const PModules = (props) => {
 
 
 
-
     return (
         <FullPageWrapper>
             <div style={{ width: "90%" }}>
@@ -168,8 +167,9 @@ const PModules = (props) => {
 
                         <Grid container justify="center" spacing={2} style={{ margin: "19px" }} xs={12}>
                             {searchedMods.map((mod) => {
-                                mod.title = mod.title.length > 20 ? mod.title.substr(0, 32) + ".." : mod.title
-                                mod.description = mod.description.length > 35 ? mod.description.substr(0, 32) + ".." : mod.description
+                                mod.title = mod.title.length > 30 ? mod.title.substr(0, 30) + ".." : mod.title
+                                console.log(mod.title)
+                                mod.description = mod.description.length > 35 ? mod.description.substr(0, 35) + ".." : mod.description
                                 //35
                                 return (
                                     <Grid item>

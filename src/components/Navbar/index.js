@@ -3,7 +3,7 @@ import NavButton from './NavButton'
 import { Container, Row, Col } from 'react-grid-system'
 import { useAuth } from '../../contexts/AuthContext'
 import LuminusLogo from '../LuminusLogo'
-import { PackageIcon, GraphIcon, PeopleIcon, BellIcon, PersonIcon, SignOutIcon } from '@primer/octicons-react';
+import { PackageIcon, ListUnorderedIcon, PeopleIcon, BellIcon, PersonIcon, SignOutIcon } from '@primer/octicons-react';
 import './navBar.css'
 
 const NavBar = () => {
@@ -17,21 +17,17 @@ const NavBar = () => {
             <nav>
                 <Col>
                     <Row>
-                        <NavButton text="Dashboard" to="/dashboard" icon={<GraphIcon size={16} />} />
-                    </Row>
-                    <Row>
                         <NavButton text="Modules" to="/" icon={<PackageIcon size={16} />} />
                     </Row>
-                    {isProf && (
-                        <Row>
-                            <NavButton text="Students" to="/students" icon={<PeopleIcon size={16} />} />
-                        </Row>
-                    )}
-                    {isProf && (
-                        <Row>
-                            <NavButton text="Professors" to="/professors" icon={<PeopleIcon size={16} />} />
-                        </Row>
-                    )}
+                    <Row>
+                        <NavButton text="My threads" to="/my_threads" icon={<ListUnorderedIcon size={16} />} />
+                    </Row>
+                    <Row>
+                        <NavButton text="Students" to="/students" icon={<PeopleIcon size={16} />} />
+                    </Row>
+                    <Row>
+                        <NavButton text="Professors" to="/professors" icon={<PeopleIcon size={16} />} />
+                    </Row>
                     <Row>
                         <NavButton text="Notifications" to="/notifs" icon={<BellIcon size={16} />} />
                     </Row>
